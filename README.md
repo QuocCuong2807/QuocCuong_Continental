@@ -6,7 +6,7 @@
   
 - *Admins features*: add new room, update room information,delete room,  add new room's furniture, update furniture's name,  find booking by confirmation code.
 
-- *Authenication & Authorization with Spring Security and json web token*
+- *Authenication & Authorization with Spring Security and Json Web Token*
 
 **LANGUAGES/TECHNOLOGIES USED:**
 
