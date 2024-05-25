@@ -5,6 +5,7 @@ import com.springteam.newbackend.dto.AuthResponseDto;
 import com.springteam.newbackend.dto.RefreshTokenRequestDto;
 import com.springteam.newbackend.entity.Role;
 import com.springteam.newbackend.entity.UserEntity;
+import com.springteam.newbackend.exception.InvalidAuthInfo;
 import com.springteam.newbackend.security.JwtGenerator;
 import com.springteam.newbackend.service.IRoleService;
 import com.springteam.newbackend.service.IUserService;
@@ -49,6 +50,10 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<AuthResponseDto> login(@RequestBody AuthDto loginDto) {
 
+        if (loginDto.getUserName().trim().equals("") || loginDto.getUserName() == null
+                || loginDto.getPassword().trim().equals("") || loginDto.getPassword() == null)
+            throw new InvalidAuthInfo("Invalid register information");
+
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginDto.getUserName(), loginDto.getPassword()));
 
@@ -63,6 +68,10 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody AuthDto registerDto) {
+
+        if (registerDto.getUserName().trim().equals("") || registerDto.getUserName() == null
+                || registerDto.getPassword().trim().equals("") || registerDto.getPassword() == null)
+            throw new InvalidAuthInfo("Invalid register information");
 
         if (userService.isUserExisting(registerDto.getUserName()))
             return new ResponseEntity<>("User name is taken", HttpStatus.BAD_REQUEST);
@@ -80,7 +89,6 @@ public class AuthController {
 
     @PostMapping("/refreshToken")
     public ResponseEntity<UserDetails> refreshToken(@RequestBody RefreshTokenRequestDto refreshTokenRequest) {
-
 
 
         return new ResponseEntity<>(null, HttpStatus.OK);

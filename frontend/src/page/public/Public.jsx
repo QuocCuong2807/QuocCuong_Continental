@@ -9,22 +9,25 @@ import TokenContext from "../../store/TokenContext";
 import { jwtDecode } from "jwt-decode";
 import LoginForm from "../../component/common/LoginForm";
 import { toast } from "react-toastify";
-
 import { useNavigate } from "react-router-dom";
-
+import RegisterForm from "../../component/common/RegisterForm";
+import {showErrorToast, showSuccessToast} from "../../resusable/reusablefunction"
 
 function Public() {
   /**states contains token values */
   const { token, setToken } = useContext(TokenContext);
   const { aud } = token ? jwtDecode(token) : "";
-  const roles = aud ? [aud.slice(1,-1)] : [];
+  const roles = aud ? [aud.slice(1, -1)] : [];
 
   /**states contains authentication values */
   const initAuthentication = { userName: "", password: "" };
   const [authentication, setAuthentication] = useState(initAuthentication);
 
   const [showLoginForm, setShowLoginForm] = useState(false);
-  const navigate = useNavigate()
+  const [showRegisterForm, setShowRegisterForm] = useState(false);
+
+  const navigate = useNavigate();
+
   /**handle with state function*/
   const handleShowLoginForm = () => {
     setShowLoginForm(true);
@@ -32,6 +35,14 @@ function Public() {
   const handleHideLoginForm = () => {
     setAuthentication(initAuthentication);
     setShowLoginForm(false);
+  };
+  const handleShowRegisterForm = () => {
+    handleHideLoginForm();
+    setShowRegisterForm(true);
+  };
+  const handleHideRegisterForm = () => {
+    setShowRegisterForm(false);
+    setAuthentication(initAuthentication);
   };
 
   const handleSetUsername = (e) => {
@@ -45,7 +56,16 @@ function Public() {
     setToken(token);
   };
 
-  console.log(authentication)
+  console.log(authentication);
+
+  const register = async () => {
+    try {
+      const response = await axios.post("http://localhost:8080/api/auth/register",authentication)
+      showSuccessToast(response.data)
+    } catch (error) {
+      showErrorToast(error.response.data.message)
+    }
+  }
 
   const login = async () => {
     try {
@@ -57,25 +77,16 @@ function Public() {
       handleReceiveToken(accessToken);
     } catch (error) {
       console.log(error);
-      toast.error("Bad Credentials", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      showErrorToast("Bad Credentials")
+      handleHideRegisterForm()
     }
     handleHideLoginForm();
   };
 
   const Logout = () => {
-    localStorage.removeItem("accessToken")
-    setToken("")
-    
-  }
+    localStorage.removeItem("accessToken");
+    setToken("");
+  };
 
   return (
     <div>
@@ -84,7 +95,7 @@ function Public() {
           accessToken={token}
           authorities={roles}
           OnShowLoginModal={handleShowLoginForm}
-          OnLogout = {Logout}
+          OnLogout={Logout}
         />
         <Outlet />
         <Footer />
@@ -98,6 +109,7 @@ function Public() {
               Auth={authentication}
               OnUsernameChange={handleSetUsername}
               OnPasswordChange={handleSetPassword}
+              OnShowRegisterForm={handleShowRegisterForm}
             />
           </Modal.Body>
           <Modal.Footer>
@@ -114,6 +126,31 @@ function Public() {
               onClick={login}
             >
               Login
+            </button>
+          </Modal.Footer>
+        </Modal>
+
+        <Modal show={showRegisterForm} backdrop="static" keyboard={false}>
+          <Modal.Header>
+            <Modal.Title>Register</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <RegisterForm
+              Auth={authentication}
+              OnUserNameChange={handleSetUsername}
+              OnPasswordChange={handleSetPassword}
+            />
+          </Modal.Body>
+          <Modal.Footer>
+            <button
+              type="button"
+              className="btn btn-outline-secondary"
+              onClick={handleHideRegisterForm}
+            >
+              Close
+            </button>
+            <button type="button" className="btn btn-outline-primary" onClick={register}>
+              Register
             </button>
           </Modal.Footer>
         </Modal>

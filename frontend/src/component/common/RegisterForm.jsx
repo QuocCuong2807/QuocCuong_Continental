@@ -1,5 +1,7 @@
 import React from "react";
-function LoginForm({Auth, OnUsernameChange, OnPasswordChange, OnShowRegisterForm }) {
+
+function RegisterForm({Auth, OnUserNameChange, OnPasswordChange}) {
+
   return (
     <div>
       <div className="mb-3 row">
@@ -12,7 +14,7 @@ function LoginForm({Auth, OnUsernameChange, OnPasswordChange, OnShowRegisterForm
             className="form-control"
             id="staticEmail"
             name="userName"
-            onChange={ e => OnUsernameChange(e)}
+            onChange={e => OnUserNameChange(e)}
             value={Auth.userName}
           />
         </div>
@@ -32,17 +34,8 @@ function LoginForm({Auth, OnUsernameChange, OnPasswordChange, OnShowRegisterForm
           />
         </div>
       </div>
-      <div className="row">
-        <div className="col-md-4"></div>
-        <div className="col-md-8 d-flex">
-          <p className="text-secondary" style={{ marginTop: 7 }}>
-            Do not have an account?{" "}
-          </p>
-          <a className="btn text-info" onClick={() => OnShowRegisterForm()}>register here</a>
-        </div>
-      </div>
     </div>
   );
 }
 
-export default LoginForm;
+export default RegisterForm;
