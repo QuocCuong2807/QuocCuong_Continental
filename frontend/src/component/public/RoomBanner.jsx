@@ -37,7 +37,7 @@ function RoomBanner({ rooms }) {
                 style={{ height: 162 }}
               />
               <div class="card-body">
-                <p class="card-text">{item.name}</p>
+                <p class="card-text d-inline-block text-truncate" style={{width: 265}}>{item.name}</p>
               </div>
             </div>
           </Link>

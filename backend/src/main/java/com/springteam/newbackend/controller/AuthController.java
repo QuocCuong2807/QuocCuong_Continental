@@ -87,10 +87,5 @@ public class AuthController {
         return new ResponseEntity<>("register successfully", HttpStatus.CREATED);
     }
 
-    @PostMapping("/refreshToken")
-    public ResponseEntity<UserDetails> refreshToken(@RequestBody RefreshTokenRequestDto refreshTokenRequest) {
 
-
-        return new ResponseEntity<>(null, HttpStatus.OK);
-    }
 }

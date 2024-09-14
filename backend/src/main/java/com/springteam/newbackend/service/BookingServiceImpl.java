@@ -3,6 +3,7 @@ package com.springteam.newbackend.service;
 import com.springteam.newbackend.dto.*;
 import com.springteam.newbackend.entity.Booking;
 import com.springteam.newbackend.entity.Room;
+import com.springteam.newbackend.exception.CheckInDateInvalidException;
 import com.springteam.newbackend.exception.InvalidBookingException;
 import com.springteam.newbackend.repository.IBookingRepository;
 import com.springteam.newbackend.repository.IRoomRepository;
@@ -38,6 +39,8 @@ public class BookingServiceImpl implements IBookingService {
         try {
             LocalDate checkOut = LocalDate.parse(checkOutDate);
             LocalDate checkIn = LocalDate.parse(checkInDate);
+
+            if (checkIn.isBefore(LocalDate.now())) throw new CheckInDateInvalidException("Ngày check-in không hợp lệ");
 
             Page<Room> page = roomRepository.findAllAvailableRoomsByBookingDate(checkIn, checkOut, pageable);
 

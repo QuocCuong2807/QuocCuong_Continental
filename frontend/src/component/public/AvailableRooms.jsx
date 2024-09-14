@@ -15,8 +15,11 @@ function AvailableRooms({ availableRooms, onPageClick, pagination, OnShowModal }
             />
           </div>
           <div className="col-md-6" style={{ marginTop: 80 }}>
-            <div className="room-heading my-3">
+            <div className="room-heading my-3 d-flex justify-content-between align-item-center">
               <h5>{item.name}</h5>
+              <Link to={`/roomDetail/${item.id}`} style={{ color: "#707070", textDecoration: "underline" }}>
+                View Detail
+              </Link>
             </div>
             <div className="row align-item-center">
               <div className="col-md-5">
@@ -36,9 +39,7 @@ function AvailableRooms({ availableRooms, onPageClick, pagination, OnShowModal }
             </div>
             <div className="room-info">
               <p style={{ color: "#707070" }}>{item.description}</p>
-              <Link to={`/roomDetail/${item.id}`} style={{ color: "#707070", textDecoration: "underline" }}>
-                View Detail
-              </Link>
+              
             </div>
           </div>
         </div>

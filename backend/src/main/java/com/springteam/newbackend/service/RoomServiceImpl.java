@@ -148,7 +148,6 @@ public class RoomServiceImpl implements IRoomService {
         Room room = roomRepository.findById(id).get();
         MultipartFile mainImage = optionalMainImage.orElse(null);
         List<MultipartFile> imageDescription = optionalImageDescription.orElse(null);
-
         if (!name.trim().equals("") || name != null)
             room.setName(name);
         if (price >= 0)

@@ -41,7 +41,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                         new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
                 authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-
             }
         } catch (AuthenticationCredentialsNotFoundException e) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

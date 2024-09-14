@@ -8,7 +8,6 @@ import { Modal } from "react-bootstrap";
 import TokenContext from "../../store/TokenContext";
 import { jwtDecode } from "jwt-decode";
 import LoginForm from "../../component/common/LoginForm";
-import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import RegisterForm from "../../component/common/RegisterForm";
 import {showErrorToast, showSuccessToast} from "../../resusable/reusablefunction"

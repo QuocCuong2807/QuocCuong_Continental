@@ -23,6 +23,7 @@ function Room() {
     setMultipleImg(e.target.files);
   };
 
+
   //init room state
   const initRoomState = {
     id: "",
@@ -161,7 +162,7 @@ function Room() {
         handleHideAddRoomModal();
       }
     } catch (error) {
-      handleErrorResponse(error)
+      handleErrorResponse(error);
     }
     setTargetPage(0);
     getAllRooms(targetPage);
@@ -210,19 +211,21 @@ function Room() {
         "http://localhost:8080/api-room/room",
         form,
         {
-          headers: { "Content-Type": "multipart/form-data" },
-          Authorization: `Bearer ${token}`,
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
       console.log(response.data);
 
-      showSuccessToast("Tên phòng bị trống");
+      showSuccessToast(response.data);
       setIsLoading(false);
       setIsShowEditRoomModal(false);
       setTargetPage(0);
       getAllRooms(targetPage);
     } catch (error) {
-      handleErrorResponse(error)
+      handleErrorResponse(error);
     }
   };
 

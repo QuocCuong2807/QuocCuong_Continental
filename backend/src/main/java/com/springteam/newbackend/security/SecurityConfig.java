@@ -39,7 +39,6 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST,"/api-furniture/**").hasAuthority("ADMIN")
                         .requestMatchers(HttpMethod.GET,"/api-furniture/**").permitAll()
                         .requestMatchers(HttpMethod.GET,"/api-room/**").permitAll()
-                        .requestMatchers(HttpMethod.POST,"/api-room/**").hasAuthority("ADMIN")
                         .requestMatchers(HttpMethod.PUT,"/api-room/**").hasAuthority("ADMIN")
                         .requestMatchers(HttpMethod.DELETE,"/api-room/**").hasAuthority("ADMIN")
                         .requestMatchers(HttpMethod.GET,"/api-booking/**").permitAll()

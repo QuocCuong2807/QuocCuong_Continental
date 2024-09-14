@@ -16,6 +16,7 @@ function Stay() {
     getAllRooms();
   }, []);
 
+
   const getAllRooms = async () => {
     setIsLoading(true);
     try {
@@ -37,11 +38,11 @@ function Stay() {
           <h1>ACCOMMODATIONS</h1>
           <p className="mx-5 my-5">
             Lấy cảm hứng từ thành phố và được thiết kế lại theo phong cách táo
-            bạo, các phòng và suite của QUỐC CƯỜNG CONTINENTAL đều đạt đẳng
-            cấp riêng. Mỗi phòng có màu sắc và các điểm nhấn chu đáo (ví dụ: các
-            điểm nhấn sọc đen và trắng gợi nhớ đến lối băng qua đường của thành phố NewYork),
-            trong khi bố cục tối ưu hóa sự cân bằng giữa công việc và vui chơi.
-            Chào mừng đến với ngôi nhà mới của bạn!.
+            bạo, các phòng và suite của QUỐC CƯỜNG CONTINENTAL đều đạt đẳng cấp
+            riêng. Mỗi phòng có màu sắc và các điểm nhấn chu đáo (ví dụ: các
+            điểm nhấn sọc đen và trắng gợi nhớ đến lối băng qua đường của thành
+            phố NewYork), trong khi bố cục tối ưu hóa sự cân bằng giữa công việc
+            và vui chơi. Chào mừng đến với ngôi nhà mới của bạn!.
           </p>
         </div>
         <div className="row">

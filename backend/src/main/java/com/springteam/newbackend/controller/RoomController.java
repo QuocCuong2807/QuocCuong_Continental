@@ -91,7 +91,6 @@ public class RoomController {
                                              @RequestParam(value = "image_description") Optional<List<MultipartFile>> image_description,
                                              @RequestParam(value = "furnitureSet") Optional<List<String>> furnitureSet
     ) {
-
         Long roomId = Long.valueOf(id);
         int newPrice;
 
@@ -102,8 +101,6 @@ public class RoomController {
             throw new InvalidPriceException("Giá không hợp lệ");
         }
         if (newPrice <= 0) throw new InvalidPriceException("Giá không hợp lệ");
-
-
         roomService.updateRoom(roomId, name, newPrice, description, main_image, image_description, furnitureSet);
 
         return new ResponseEntity<>("success", HttpStatus.OK);

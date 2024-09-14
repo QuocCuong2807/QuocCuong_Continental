@@ -46,8 +46,12 @@ function Booking() {
       const requestUrl = `http://localhost:8080/api-booking/availableRooms?checkInDate=${formattedCheckInDate}&checkOutDate=${formattedCheckOutDate}&p=${targetPage}&sortParam=${sorting}`;
       const response = await fetch(requestUrl);
       const responseJson = await response.json();
+      console.log(responseJson)
+      if(responseJson.status === 400){
+        showErrorToast(responseJson.message)
+        return
+      }
       const { data } = responseJson;
-
       setAvailableRooms(data);
       setPagination({
         isFirstPage: responseJson.firstPage,

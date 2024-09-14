@@ -74,6 +74,15 @@ function Furniture() {
     setInsertModal(!insertModal);
   };
 
+  const handleShowInsertModal = () => {
+    setInsertModal(true)
+  }
+
+  const handleHideInsertModal = () => {
+    setFurniture(initFurnitureState)
+    setInsertModal(false)
+  }
+
   const handleShowEditModal = (item) => {
     if (!editModal) setUpdatedFurniture(item);
     setEditModal(true);
@@ -133,7 +142,7 @@ function Furniture() {
     }
 
     //close insert modal
-    handleShowHideInsertModal();
+    handleHideInsertModal()
   };
 
   //update existing furniture
@@ -190,7 +199,7 @@ function Furniture() {
         <button
           type="button"
           class="btn btn-primary"
-          onClick={() => handleShowHideInsertModal()}
+          onClick={() => handleShowInsertModal()}
         >
           Add+
         </button>
@@ -216,7 +225,7 @@ function Furniture() {
         <Modal.Footer>
           <button
             className="btn btn-secondary"
-            onClick={() => handleShowHideInsertModal()}
+            onClick={() => handleHideInsertModal()}
           >
             Close
           </button>
